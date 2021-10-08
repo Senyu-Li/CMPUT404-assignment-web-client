@@ -99,8 +99,8 @@ class HTTPClient(object):
 
     def GET(self, url, args=None):
         parsed_url = urllib.parse.urlparse(url)
-        print(url)
-        print(parsed_url)
+        #print(url)
+        #print(parsed_url)
         try:
             host = parsed_url.netloc
         except:
@@ -122,6 +122,7 @@ class HTTPClient(object):
         accept = "Accept: */*\r\n"
         request = first_line + user_agent + target_host + accept + '\r\n' 
         h,p = self.get_host_port(host)
+        #print("ip: %s"%(h))
         #print("fuck!!!!!!!!!!")
         try:
             p = int(p)
@@ -144,7 +145,8 @@ class HTTPClient(object):
             body = self.get_body(response)
         else:
             body = None
-        print("girl")
+        #print(request)
+        print(response)
         return HTTPResponse(code, body)
 
     def POST(self, url, args=None):
@@ -166,7 +168,7 @@ class HTTPClient(object):
                 #print("herehere")
                 arg_transformed = arg_transformed + "%s=%s&"%(str(index), str(argument.replace(' ', '+')))
             arg_transformed = arg_transformed[:-1]
-            print(arg_transformed[0])
+            #print(arg_transformed)
             arg_transformed + "\r\n"       
             content_length = "Content-Length: %d\r\n"%(len(arg_transformed))
             request =  first_line + user_agent + target_host + accept + content_length + content_type + '\r\n' + arg_transformed 
@@ -193,7 +195,7 @@ class HTTPClient(object):
         #print("code: ")
         #print(code)
         #print("body: ")
-        #print(body)
+        print(response)
         return HTTPResponse(code, body)
 
     def command(self, url, command="GET", args=None):
