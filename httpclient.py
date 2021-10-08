@@ -101,7 +101,6 @@ class HTTPClient(object):
         parsed_url = urllib.parse.urlparse(url)
         print(url)
         print(parsed_url)
-        print("gooooood!!!!!!!!!!")
         try:
             host = parsed_url.netloc
         except:
@@ -114,6 +113,8 @@ class HTTPClient(object):
                 path = '/'
         except:
             path = "/"
+        if parsed_url.query != '':
+            path = path+'?'+parsed_url.query
         #print("more more gooooood!!!!!!!!!!")
         first_line = "GET %s HTTP/1.1\r\n"%(path)
         user_agent = "User-Agent: Senyu_Li/happyagent1.0\r\n"
